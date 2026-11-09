@@ -55,6 +55,9 @@ namespace Aula2Marcelo.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<int>("CategoriaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(80)
@@ -62,7 +65,20 @@ namespace Aula2Marcelo.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoriaId");
+
                     b.ToTable("Livros");
+                });
+
+            modelBuilder.Entity("Aula2Marcelo.Models.Livro", b =>
+                {
+                    b.HasOne("Aula2Marcelo.Models.Categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
                 });
 #pragma warning restore 612, 618
         }

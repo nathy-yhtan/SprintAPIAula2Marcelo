@@ -20,5 +20,10 @@ namespace Aula2Marcelo.Models
 
         public int AnoPublicacao { get; set; }
 
+        //'?' significa que pode ser nula
+        //o nome é 'EntidadeAtributo'
+        public int CategoriaId { get; set; } //chave estrangeira
+        public Categoria? Categoria { get; set; } //propriedade de navegação
+
     }
 }

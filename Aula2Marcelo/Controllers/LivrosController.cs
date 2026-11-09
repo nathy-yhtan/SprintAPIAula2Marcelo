@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Aula2Marcelo.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aula2Marcelo.Controllers
@@ -8,21 +9,17 @@ namespace Aula2Marcelo.Controllers
     public class LivrosController : ControllerBase
     {
 
+        //variável de acesso ao banco
+        private readonly ILivroRepository _repository;
 
-        [HttpGet]
-        public IActionResult GetLivros()
+        //injeção de dependencia
+        public LivrosController (ILivroRepository repository)
         {
-            var livrosFalsos = new List<string>
-            {
-                "O senhor dos anéis",
-                "Verity",
-                "Memórias do subsolo",
-                "O manifesto comunista"
-            };
-
-            return Ok(livrosFalsos);
+            _repository = repository;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get() => Ok(await _repository.ListarTodos());
 
         //TEM QUE COLOCAR UM NOVO NOME
         [HttpGet("boasvindas")]
