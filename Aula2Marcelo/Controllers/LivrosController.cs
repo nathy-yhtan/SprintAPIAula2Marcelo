@@ -1,6 +1,7 @@
 ﻿using Aula2Marcelo.DTOs;
 using Aula2Marcelo.Repositories;
 using Aula2Marcelo.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,7 @@ namespace Aula2Marcelo.Controllers
         public async Task<IActionResult> Get() => Ok(await _service.ListarTodos());
 
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post(LivroDTO livroDto)
         {
