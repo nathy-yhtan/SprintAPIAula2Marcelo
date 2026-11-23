@@ -102,6 +102,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//front
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 //na ordem
 app.UseAuthentication();
 app.UseAuthorization();

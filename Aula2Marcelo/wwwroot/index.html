@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Painel da Biblioteca</h1>
+
+    <h2>Cadastrar um novo livro</h2>
+
+    <div>
+
+        <label for="">Auth JWT</label>
+
+        <input type="text" id="input Token" placeholder="coloque seu token JWT aqui">
+
+        <br>
+
+        <button onclick="cadastrarLivros()">Cadastrar Livro</button>
+
+        <br>
+
+    </div>
+
+
+    <section>
+
+        <button onclick="carregarLivros()">Atualizar Livros</button>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaCorpo">
+
+            </tbody>
+        </table>
+
+    </section>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
