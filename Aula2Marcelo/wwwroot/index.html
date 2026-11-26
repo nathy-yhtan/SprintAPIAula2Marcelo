@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- CSS do Bootstrap -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
 </head>
 
 <body>
@@ -21,7 +23,7 @@
 
         <br>
 
-        <button onclick="cadastrarLivros()">Cadastrar Livro</button>
+        <button onclick="cadastrarLivros()" class="btn btn-primary">Cadastrar Livro</button>
 
         <br>
 
@@ -30,7 +32,7 @@
 
     <section>
 
-        <button onclick="carregarLivros()">Atualizar Livros</button>
+        <button onclick="carregarLivros()" class="btn btn-primary">Atualizar Livros</button>
 
         <table border="1">
             <thead>
@@ -41,13 +43,15 @@
                 </tr>
             </thead>
             <tbody id="tabelaCorpo">
-
             </tbody>
         </table>
 
     </section>
 
     <script src="app.js"></script>
+
+    <!-- JavaScript Bundle do Bootstrap (inclui Popper) -->
+    <script src="https://jsdelivr.net"></script>
 </body>
 
 </html>

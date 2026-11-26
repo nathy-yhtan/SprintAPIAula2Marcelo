@@ -33,6 +33,10 @@ builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 //❗REGISTROS DOS SERVIÇOS
 builder.Services.AddScoped<ILivroService, LivroService>();
 
+//❗REGISTRO DO USUARIO
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 //❗CONFIGURAÇÃO DO JWT
 var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
 
@@ -50,7 +54,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-//❗CONFIGURAÇÃO DO BOTÃO NO SWAGGER
+//❗CONFIGURAÇÃO DO BOTÃO NO SWAGGER❗
 builder.Services.AddSwaggerGen(c =>
 {
 

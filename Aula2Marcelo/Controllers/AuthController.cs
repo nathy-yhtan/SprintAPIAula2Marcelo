@@ -1,4 +1,5 @@
 ﻿using Aula2Marcelo.DTOs;
+using Aula2Marcelo.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -12,41 +13,44 @@ namespace Aula2Marcelo.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
 
-        public AuthController(IConfiguration configuration)
+        private readonly IAuthService _authService;
+
+
+        public AuthController(IAuthService authService)
         {
-            _configuration = configuration;
+            _authService = authService;
         }
+
+
+        [HttpPost("registrar")]
+        public async Task<IActionResult> Registrar([FromBody] LoginDTO dto)
+        {
+            try
+            {
+                await _authService.Registrar(dto);
+                return Ok(new { mensagem = "Usuario cadastrado com sucesso" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
+        }
+
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginDTO login)
+        public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         {
-            if (login.Usuario == "admin" && login.Senha == "123456")
+            try
             {
-                var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new[]
-                    {
-                        new Claim(ClaimTypes.Name, login.Usuario),
-                        new Claim(ClaimTypes.Role, "Administrador")
-                    }),
-
-                    Expires = DateTime.UtcNow.AddHours(2),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key)
-                    , SecurityAlgorithms.HmacSha256Signature),
-                    Issuer = _configuration["Jwt:Issuer"],
-                    Audience = _configuration["Jwt:Audience"]
-                };
-
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-
-                return Ok(new { token = tokenHandler.WriteToken(token), messagem = "Login feito" });
-
+                var token = await _authService.Login(dto);
+                return Ok(new { token, usuario = dto.NomeUsuario });
             }
-            return Unauthorized(new { erro = "usuario ou senha incorretos" });
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new { erro = ex.Message });
+            }
         }
+
     }
 }

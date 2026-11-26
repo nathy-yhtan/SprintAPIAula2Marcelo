@@ -70,6 +70,27 @@ namespace Aula2Marcelo.Migrations
                     b.ToTable("Livros");
                 });
 
+            modelBuilder.Entity("Aula2Marcelo.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("NomeUsuario")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
+                });
+
             modelBuilder.Entity("Aula2Marcelo.Models.Livro", b =>
                 {
                     b.HasOne("Aula2Marcelo.Models.Categoria", "Categoria")
