@@ -44,6 +44,36 @@ namespace Aula2Marcelo.Controllers
 
         }
 
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, LivroDTO livroDTO)
+        {
+            try
+            {
+                await _service.Atualizar(id, livroDTO);
+                return Ok(new { mensagem = "Livro atualizado com sucesso" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _service.Remover(id);
+                return Ok(new { mensagem = "Livro deletado com sucesso" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
     }
 
 }

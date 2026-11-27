@@ -8,5 +8,9 @@ namespace Aula2Marcelo.Services
         Task<IEnumerable<Livro>> ListarTodos();
 
         Task Criar(LivroDTO livroDTO);
+
+        Task Atualizar(int id, LivroDTO livroDTO);
+
+        Task Remover(int id);
     }
 }

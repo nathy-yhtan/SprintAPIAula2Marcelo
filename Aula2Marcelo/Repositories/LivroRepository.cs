@@ -26,10 +26,32 @@ namespace Aula2Marcelo.Repositories
                 .ToListAsync();
         }
 
+
         // Salvar no banco
         public async Task Adicionar(Livro Livro)
         {
             await _context.Livros.AddAsync(Livro);
+            await _context.SaveChangesAsync();
+        }
+
+
+        //buscar no banco
+        public async Task<Livro?>Buscar(int id)
+        {
+            return await _context.Livros.FindAsync(id);
+        }
+
+
+        public async Task Atualizar(Livro livro)
+        {
+            _context.Livros.Update(livro);
+            await _context.SaveChangesAsync();
+        }
+
+
+        public async Task Remover(Livro livro)
+        {
+            _context.Livros.Remove(livro);
             await _context.SaveChangesAsync();
         }
 

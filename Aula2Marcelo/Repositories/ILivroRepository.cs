@@ -15,5 +15,11 @@ namespace Aula2Marcelo.Repositories
         //regra pra criar novos registros
         Task Adicionar(Livro livro);
 
+        Task<Livro?> Buscar(int id);
+
+        Task Atualizar(Livro livro);
+
+        Task Remover(Livro livro);
+
     }
 }
